@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-1.4.0.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-api-1.4.0.min.js"></script>
+
+<script>
+
+$( document ).ready(function() {
+
+  fetch('/plot')
+    .then(function(response) { return response.json(); })
+    .then(function(item) { 
+	a=Bokeh.embed.embed_item(item, "myplot"); 
+	console.log(a);
+  	$('#myplot').resizable({
+		resize: function(event,ui) {
+			item.resize_layout();
+		}
+	});
+    });
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+<div id="myplot" style="width: 400px; height: 300px; border: solid 1px black; padding: 20px;"></div>
+
+</body>
+
+</html>
